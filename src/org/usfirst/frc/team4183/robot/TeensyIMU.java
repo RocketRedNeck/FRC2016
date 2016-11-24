@@ -1,10 +1,7 @@
 package org.usfirst.frc.team4183.robot;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jssc.SerialPort;
 import jssc.SerialPortException;
@@ -28,7 +25,7 @@ public class TeensyIMU {
 	PrintWriter pw;
 
 	private double calYawRateBias = 0.0;
-	private double accumulatedYawError = 0.0;
+	private double accumulatedYawError = 0.0;  // Ignore warning about initial condition not being used
 	
 	// Cal bias is a small running average of the 
 	public void setcalYawRateBias(double biasValue) {
@@ -78,8 +75,10 @@ public class TeensyIMU {
 			//Open serial port
 			serialPort.openPort();
 			//Set params.
-		    serialPort.setParams(serialPort.BAUDRATE_115200, serialPort.DATABITS_8, 
-		        						serialPort.STOPBITS_1, serialPort.PARITY_NONE);
+		    serialPort.setParams(SerialPort.BAUDRATE_115200, 
+		                         SerialPort.DATABITS_8, 
+		                         SerialPort.STOPBITS_1, 
+		                         SerialPort.PARITY_NONE);
 		}catch (SerialPortException ex) {
 		        System.out.println(ex);
 		}
